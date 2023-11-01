@@ -32,20 +32,52 @@ class LoginController extends Controller
     public function login(Request $request){
         // aplica toda a validação e autenticação aqui....
 
-        $credentials = $request->only(["email","password"]);
-        $authenticated = Auth::attempt($credentials);
-        if($authenticated){
+        // $credentials = $request->only(["email","password"]);
+        //      $authenticated = Auth::attempt($credentials);
 
-        $login['success'] = true;
-        $login['message'] = 'logado';
-        return response()->json($login);
-            // return redirect()->route("logado.index")->with("success","");
-        } else {
-            $login['success'] = false;
-            $login['message'] = "Dados invalido";
+
+        if(!$request->email || !$request->password)
+            return response()->json([
+                'success' => false,
+                'message' => 'Campos em branco'
+            ]);
+
+        $authenticated = $this->loginRepository->loginWhere(['email' => $request->email]);
+        
+        // User::where('email', $request->email)->first();
+
+        if(!password_verify($request->password, $authenticated->password))
+            return response()->json([
+                'success' => false,
+                'message' => 'Dados invalido',
+            ]);
+
+        
+        Auth::loginUsingId($authenticated->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Logado',
+            'route' => route("logado.index"),
+        ]);
+    
+        // if($authenticated){
+
+        // $login['success'] = true;
+        // $login['message'] = 'logado';
+        // return response()->json($login);
+        //     // return redirect()->route("logado.index")->with("success","");
+        // } else {
+        //     $login['success'] = false;
+        //     $login['message'] = "Dados invalido";
             
-            return response()->json($login);
-        };
+        //     return response()->json($login);
+        // };
+
+
+
+
+
 
         // retornando reposta AJAX com JSON
 

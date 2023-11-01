@@ -30,21 +30,41 @@
         $(function(){
             $('form[name="formAJAX"]').submit(function(event){
                 event.preventDefault();
+
+                if($('#email').val() == ''){
+                    alert('Email não informado');
+                    return;
+                }
+                if($('#password').val() == ''){
+                    alert('password não informado');
+                    return;
+                }
+                    
+
+
+
                 $.ajax({
                     url: "{{ route('login.store') }}",
                     type: "post",
                     data: $(this).serialize(),
                     dataType: "json",
                     success: function(response){
+                        alert(response.message)
+                        
                         if(response['success'] === true){
-                            window.location.href = "{{ route('logado.index') }}";
-                        } else {
-                            $('.messageErrorRequest').removeClass("false-alert").html(response.message);
-                        }
+                            setTimeout(() => {
+                                window.location.href = response['route'];
+                            }, 2000);
+                        } 
+                            
                     }
                 });
             })
         });
+
+        function alert(msg){
+            $('.messageErrorRequest').removeClass("false-alert").html(msg);
+        }
     </script>
 
 @endif

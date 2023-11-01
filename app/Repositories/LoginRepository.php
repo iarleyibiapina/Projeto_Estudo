@@ -16,8 +16,8 @@ class LoginRepository implements UserRepositoryInterface{
     public function findUser($id){
         return User::find($id);
     }
-    public function loginUser($id){
-        $user = User::where('id', $id)->first();
+    public function loginWhere(array $data = []){
+        $user = User::where($data)->first();
         return $user;
     }
         public function updateUser($data, $id){
