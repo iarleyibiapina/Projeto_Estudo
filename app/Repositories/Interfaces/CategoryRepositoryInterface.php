@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Interfaces;
+namespace App\Repositories\Interfaces\FilmeRepositoryInterface;
 
 Interface CategoryRepositoryInterface{
     public function allCategories();

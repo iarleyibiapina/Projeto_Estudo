@@ -20,11 +20,16 @@
     <br>
     <div class="">
         @if (auth()->check())
-            <div class="">Você está logado.</div>
-            <br>
-            <a href="{{ route("login.destroy") }}">Logout</a>
+            <div class="">
+                <h2>Olá {{ Auth::user()->name }}</h2>
+                Você está logado.
+                <a href="{{ route("login.destroy") }}">Logout</a>
+                <hr>
+            </div>
             @else
-            <a href="{{ route("login.index") }}">Login</a>
+            <div class="">
+                <a href="{{ route("login.index") }}">Login</a>
+            </div>
         @endif
         <br>
         @yield('content')
