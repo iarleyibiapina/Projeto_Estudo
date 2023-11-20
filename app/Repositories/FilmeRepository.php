@@ -20,6 +20,7 @@ class FilmeRepository {
     $filme->nomeDoFilme = $data['nomeDoFilme'];
     $filme->categoriaDoFilme = $data['categoriaDoFilme'];
     $filme->descricaoDoFilme = $data['descricaoDoFilme'];
+    $filme->save();
     }
     public function destroyFilme($id){
         $filme = Filme::find($id);

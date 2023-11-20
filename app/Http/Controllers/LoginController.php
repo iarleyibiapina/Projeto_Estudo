@@ -26,7 +26,7 @@ class LoginController extends Controller
     public function destroy(){
         Auth::logout();
 
-        return redirect()->route("login.index");
+        return redirect()->route("index");
     }
 
     public function login(Request $request){
@@ -43,6 +43,13 @@ class LoginController extends Controller
             ]);
 
         $authenticated = $this->loginRepository->loginWhere(['email' => $request->email]);
+
+        if(!$authenticated)
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuario não existente'
+            ]);
+        
         
         // User::where('email', $request->email)->first();
 

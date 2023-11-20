@@ -68,6 +68,8 @@ class FilmeController extends Controller
     public function edit(string $id)
     {
         //
+        $buscaFilme = $this->filmeRepository->findFilme($id);
+        return view("Filmes.show", compact("buscaFilme"));
     }
 
     /**
@@ -76,6 +78,8 @@ class FilmeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $this->filmeRepository->updateFilme($request->all(), $id);
+        return redirect()->route("logado.index");
     }
 
     /**
@@ -84,5 +88,7 @@ class FilmeController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->filmeRepository->destroyFilme($id);
+        return redirect()->route("logado.index");
     }
 }

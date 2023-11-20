@@ -17,6 +17,6 @@ class HomeController extends Controller
 
                 $teste = $this->filmeRepository->allFilmes();
 
-        return view('index', compact("teste"));
+        return view('content', compact("teste"));
     }
 }
