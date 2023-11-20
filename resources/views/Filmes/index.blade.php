@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/form.css') }}">
+
+
 <style>
     form{
         display: flex; 
@@ -7,19 +11,14 @@
     input, select,  button{
         margin: 1rem 0;
     }
-    .header{
-        padding: 2rem;
-    }
 </style>
 
-<div class="header">
-
+<div class="nav">
     <h1>Criar Filme</h1>
-    <a href="{{ route('logado.index') }}">Voltar para home</a>
-
+    <a href="{{ route('logado.index') }}" class="btn">Voltar para home</a>
 </div>
 
-<form action="{{ route('filmes.store') }}" style="">
+<form action="{{ route('filmes.store') }}" style="padding: 10px;">
     @csrf
     <label for="nomeFilme">Nome do Filme</label>
     <input type="text" id="nomeDoFilme" name="nomeDoFilme" value="{{ old('nomeDoFilme') }}">
@@ -32,6 +31,6 @@
         </select>
     <label for="descricaoFilme">Descrição do filme</label>
     <textarea name="descricaoDoFilme" id="descricaoDoFilme" cols="20" rows="10" placeholder="Descrição.....">{{ old('descricaoDoFilme') }}</textarea>
-    <button type="submit">Enviar</button>
+    <button type="submit" class="btn">Enviar</button>
 </form>
 

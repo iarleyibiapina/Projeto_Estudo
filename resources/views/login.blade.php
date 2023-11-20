@@ -1,15 +1,17 @@
 @extends('index')
 
-@section('content')
-<h2>Criar Login</h2>
-<a href="{{ route('index') }}">voltar</a>
-
+{{-- @section('content') --}}
+@section('login')
+<div class="content-login">
+    <div class="nav-login">
+        <h2>Entrar no sistema</h2>
+        <a href="{{ route('index') }}" class="btn">voltar</a>
+    </div>
 
 @if(!auth()->check()) 
-
 <div class="messageErrorRequest false-alert"></div>
 
-<h2>ABA DE LOGIN</h2>
+<h2>Digite seu Login</h2>
     @error('error')
         <span>{{ $message }}</span>
     @enderror
@@ -23,8 +25,9 @@
         @error('password')
             <span>{{ $message }}</span>
         @enderror
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn btn-submit">Enviar</button>
     </form>
+</div>
 
     <script>
         $(function(){

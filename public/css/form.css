@@ -1,0 +1,13 @@
+.content-login {
+    background-color: #909090;
+    padding: 2rem;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.messageErrorRequest {
+    position: absolute;
+    top: 0;
+    transform: translate(0, 100%);
+    color: red;
+}

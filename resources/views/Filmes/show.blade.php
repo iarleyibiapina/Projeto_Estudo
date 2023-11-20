@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="{{ URL::asset('css/main.css') }}">
+<link rel="stylesheet" href="{{ URL::asset('css/form.css') }}">
+
 <style>
     form{
         display: flex; 
@@ -7,20 +10,16 @@
     input, select,  button{
         margin: 1rem 0;
     }
-    .header{
-        padding: 2rem;
-    }
+
 </style>
 
-<div class="header">
+<div class="nav">
     <h1>Editar Filme</h1>
-    <a href="{{ route('logado.index') }}">Voltar para home</a>
+    <a href="{{ route('logado.index') }}" class="btn">Voltar para home</a>
 </div>
-
-{{-- {{ route("filmes.update") }} --}}
-
-<form action="" style="">
+<form action="{{ route("filmes.update", $buscaFilme->id) }}" style="padding: 10px" method="POST">
     @csrf
+    @method('PUT')
     <label for="nomeFilme">Nome do Filme</label>
     <input type="text" id="nomeDoFilme" name="nomeDoFilme" value="{{ $buscaFilme->nomeDoFilme }}">
     <label for="categoriaFilme">Categoria do Filme</label>
@@ -31,7 +30,9 @@
         <option value="aventura">Aventura</option>
         </select>
     <label for="descricaoFilme">Descrição do filme</label>
-    <textarea name="descricaoDoFilme" id="descricaoDoFilme" cols="20" rows="10" placeholder="Descrição.....">{{ $buscaFilme->descricaoFilme }}</textarea>
-    <button type="submit">Enviar</button>
+    <textarea name="descricaoDoFilme" id="descricaoDoFilme" cols="20" rows="10" placeholder="Descrição.....">{{ $buscaFilme->descricaoDoFilme }}</textarea>
+    <button type="submit" class="btn btn-submit">Enviar</button>
+
+    {{-- APLICAR AJAX --}}
 </form>
 
