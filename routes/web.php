@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Filme\FilmeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -24,22 +25,32 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::middleware(LoginMiddleware::class)->controller(LoginController::class)->group(function () {
     // Route::get('/login', 'index')->name('login.index');
     Route::get('/login', [LoginController::class, 'index'])->name('login.index');
-    Route::get('/logado', [FilmeController::class, 'index'])->name('logado.index'); 
+    Route::get('/logado', [FilmeController::class, 'index'])->name('logado.index');
 
     // rotas filmes
 
-    Route::prefix('logado/filmes')->as('filmes.')->group(function(){    
-        Route::get('/', function(){
+    Route::prefix('logado/filmes')->as('filmes.')->group(function () {
+        Route::get('/', function () {
             return view('Filmes.index');
         })->name('index');
-        Route::get('/create', function(){ return view("Filmes.index");})->name('index');
-        Route::get('/store', [FilmeController::class, 'store'])->name('store');
+        Route::get('/create', function () {
+            return view("Filmes.index");
+        })->name('index');
+        Route::post('/store', [FilmeController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [FilmeController::class, 'edit'])->name('edit');
-        Route::put('/update/{id}', [FilmeController::class, 'update'])->name('update'); 
+        Route::put('/update/{id}', [FilmeController::class, 'update'])->name('update');
         Route::delete('/destroy/{id}', [FilmeController::class, 'destroy'])->name('destroy');
     });
 });
+
+
 Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'login')->name('login.store');
     Route::get('/logout', 'destroy')->name('login.destroy');
 });
+
+// AJAX
+Route::get('/ajax', function () {
+    return view("Site.ajax.ajax");
+});
+Route::post('/apax-post', [AjaxController::class, "request"])->name('apax-post');
