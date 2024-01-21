@@ -18,6 +18,7 @@
 
         <tr>
           <th scope="col">Nome Filme</th>
+          <th scope="col">Imagem Filme</th>
           <th scope="col">Categoria</th>
           <th scope="col">Descrição</th>
           <th scope="col" colspan="3">Opções</th>
@@ -27,6 +28,8 @@
         <tr>
     {{-- {{ dd($filme) }} --}}
             <th scope="row">{{ $filme->nomeDoFilme }}</th>
+            {{-- {{ dd($filme->imagemFilme) }} --}}
+            <td><img src="{{ $filme->imagemFilme }}" width="120" alt="filme imagem"></td>
             <td>{{ $filme->categoriaDoFilme }}</td>
             <td>{{ $filme->descricaoDoFilme }}</td>
             <td class="links-options"><a href="{{ route('filmes.edit', $filme->id) }}">editar</a> / 

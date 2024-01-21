@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\FilmeRepository;
 use App\Repositories\Interfaces\FilmeRepositoryInterface\FilmeRepositoryInterface;
-
+use Illuminate\Http\UploadedFile;
 
 class FilmeController extends Controller
 {
@@ -40,12 +40,26 @@ class FilmeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+        // dd($dados);
 
-        // dd($request->all());
-        // dd($request->only('descricaoDoFilme'));
+        // trabalhando com imagem.
+        if($request->hasFile('imagemFilme')){
+            // $nome = $request->imagemFilme->getClientOriginalName();
+            $nome = $request->imagemFilme->hashName();
+            $extensao = $request->imagemFilme->extension();
+            // $filename = $request->getSchemeAndHttpHost() . '/home/filmes/' . time() . '.' . $request->imagemFilme->extension();
+            // $filename = $request->getSchemeAndHttpHost() . '/home/filmes/' . $nome . '.' . $extensao;
+            $filename = $request->getSchemeAndHttpHost() . '/home/filmes/' . $nome;
+            // $filename = $request->getSchemeAndHttpHost() . '/home/filmes/' . time() . '-' . $nome;
+            // dd($request->imagemFilme);
+            // dd($request->file('imagemFilme'));
+            $request->imagemFilme->move(public_path('/home/filmes/'), $filename);
+        } else {
+            return redirect()->back();
+        };
 
-        $this->filmeRepository->storeFilme($request->all());
+        $this->filmeRepository->storeFilme($request->all(), $filename);
         return redirect()->route('logado.index');
     }
 
@@ -54,12 +68,9 @@ class FilmeController extends Controller
      */
     public function show(String $id)
     {
-        //
         // dd($request);
         $buscaFilme = $this->filmeRepository->findFilme($id);
-
         return view("Filmes.show", compact("buscaFilme"));
-
     }
 
     /**
@@ -78,6 +89,7 @@ class FilmeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        dd($request->all());
         $this->filmeRepository->updateFilme($request->all(), $id);
         return redirect()->route("logado.index");
     }

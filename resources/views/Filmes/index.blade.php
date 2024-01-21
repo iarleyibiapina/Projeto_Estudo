@@ -18,8 +18,10 @@
     <a href="{{ route('logado.index') }}" class="btn">Voltar para home</a>
 </div>
 
-<form action="{{ route('filmes.store') }}" style="padding: 10px;">
+<form action="{{ route('filmes.store') }}" method="POST" style="padding: 10px;" enctype="multipart/form-data">
     @csrf
+    <label for="imagemFilme">Imagem do filme:</label>
+    <input type="file" name="imagemFilme" id="imagemFilme">
     <label for="nomeFilme">Nome do Filme</label>
     <input type="text" id="nomeDoFilme" name="nomeDoFilme" value="{{ old('nomeDoFilme') }}">
     <label for="categoriaFilme">Categoria do Filme</label>

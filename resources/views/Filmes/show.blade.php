@@ -17,7 +17,7 @@
     <h1>Editar Filme</h1>
     <a href="{{ route('logado.index') }}" class="btn">Voltar para home</a>
 </div>
-<form action="{{ route("filmes.update", $buscaFilme->id) }}" style="padding: 10px" method="POST">
+<form action="{{ route("filmes.update", $buscaFilme->id) }}" style="padding: 10px" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <label for="nomeFilme">Nome do Filme</label>

@@ -14,29 +14,34 @@ class LoginController extends Controller
     //
     protected $loginRepository;
 
-        public function __construct(LoginRepository $loginRepository){
-            $this->loginRepository = $loginRepository;
-        }
-    
-    public function index(){
+    public function __construct(LoginRepository $loginRepository)
+    {
+        $this->loginRepository = $loginRepository;
+    }
+
+    public function index()
+    {
         return view('login');
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
     }
-    public function destroy(){
+    public function destroy()
+    {
         Auth::logout();
 
         return redirect()->route("index");
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         // aplica toda a validação e autenticação aqui....
 
         // $credentials = $request->only(["email","password"]);
         //      $authenticated = Auth::attempt($credentials);
 
 
-        if(!$request->email || !$request->password)
+        if (!$request->email || !$request->password)
             return response()->json([
                 'success' => false,
                 'message' => 'Campos em branco'
@@ -44,22 +49,22 @@ class LoginController extends Controller
 
         $authenticated = $this->loginRepository->loginWhere(['email' => $request->email]);
 
-        if(!$authenticated)
+        if (!$authenticated)
             return response()->json([
                 'success' => false,
                 'message' => 'Usuario não existente'
             ]);
-        
-        
+
+
         // User::where('email', $request->email)->first();
 
-        if(!password_verify($request->password, $authenticated->password))
+        if (!password_verify($request->password, $authenticated->password))
             return response()->json([
                 'success' => false,
                 'message' => 'Dados invalido',
             ]);
 
-        
+
         Auth::loginUsingId($authenticated->id);
 
         return response()->json([
@@ -67,7 +72,7 @@ class LoginController extends Controller
             'message' => 'Logado',
             'route' => route("logado.index"),
         ]);
-    
+
         // if($authenticated){
 
         // $login['success'] = true;
@@ -77,20 +82,13 @@ class LoginController extends Controller
         // } else {
         //     $login['success'] = false;
         //     $login['message'] = "Dados invalido";
-            
+
         //     return response()->json($login);
         // };
-
-
-
-
-
 
         // retornando reposta AJAX com JSON
 
         // o PHP retornar uma resposta para o JS, para visualizar a resposta no php, F12 > 'network' > name, vai ter o caminho do arquivo e a resposta do PHP.
-
-
         // if (validacao false)
         // $login['success'] = false;
         // $login['message'] = 'Email invalido';
@@ -106,5 +104,5 @@ class LoginController extends Controller
         // echo json_encode($login);
         // return;
 
-    } 
+    }
 }

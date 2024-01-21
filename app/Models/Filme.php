@@ -13,5 +13,6 @@ class Filme extends Model
         'nomeDoFilme',
         'categoriaDoFilme',
         'descricaoDoFilme',
+        'imagemFilme',
     ];
 }

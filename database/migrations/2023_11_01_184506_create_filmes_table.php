@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("nomeDoFilme");
             $table->string("categoriaDoFilme");
             $table->string("descricaoDoFilme");
+            $table->string("imagemFilme")->nullable();
             $table->timestamps();
         });
     }
