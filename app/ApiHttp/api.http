@@ -1,0 +1,17 @@
+### https://rapidapi.com/tipsters/api/sportscore1/
+### https://sportscore1.p.rapidapi.com
+### sportscore1.p.rapidapi.com
+
+#
+GET sportscore1.p.rapidapi.com/sports HTTP/1.1
+X-Rapidapi-Key: bbca696686msh1ad3728a08e5c85p1b6006jsnf69b0ac6d2a4
+X-Rapidapi-Host: sportscore1.p.rapidapi.com
+Host: sportscore1.p.rapidapi.com
+
+
+### 
+
+GET sportscore1.p.rapidapi.com/sports/1/teams?page=1 HTTP/1.1
+X-Rapidapi-Key: bbca696686msh1ad3728a08e5c85p1b6006jsnf69b0ac6d2a4
+X-Rapidapi-Host: sportscore1.p.rapidapi.com
+Host: sportscore1.p.rapidapi.com

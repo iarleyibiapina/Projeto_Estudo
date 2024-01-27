@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EstudoApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::get('/exemploApi', function () {
     echo "rota de api";
     return;
 });
+
+Route::get('/sports-index', [EstudoApiController::class, 'index'])->name('api.index');
