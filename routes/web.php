@@ -19,8 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
+// rota definida 'temporaria' pois se não passar em middleware retorna para rota de nome 'login'
+Route::get('/', function () {
+    return view('welcome');
+})->name('login');
 
 Route::middleware(LoginMiddleware::class)->controller(LoginController::class)->group(function () {
     // Route::get('/login', 'index')->name('login.index');
@@ -28,7 +34,6 @@ Route::middleware(LoginMiddleware::class)->controller(LoginController::class)->g
     Route::get('/logado', [FilmeController::class, 'index'])->name('logado.index');
 
     // rotas filmes
-
     Route::prefix('logado/filmes')->as('filmes.')->group(function () {
         Route::get('/', function () {
             return view('Filmes.index');
