@@ -18,10 +18,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-         \App\Models\User::factory()->create([
-             'name' => 'test',
-             'email' => 'um@um.com',
-             'password' => 'admin',
-         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'test',
+            'email' => 'um@um.com',
+            'password' => 'admin',
+        ]);
+
+        // para iniciar o seeder
+        // php artisan db:seed
+        // php artisan db:seed --class=UserSeeder
     }
 }

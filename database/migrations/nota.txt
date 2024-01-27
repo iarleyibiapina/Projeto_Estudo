@@ -1,0 +1,8 @@
+ao criar migration, importante utilizar nomes:
+
+create_
+alter_
+
+entre outros...
+
+pois alem do laravel criar e definir funçoes pre-definidas é uma boa pratica para melhor entender o codigo
