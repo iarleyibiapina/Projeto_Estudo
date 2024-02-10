@@ -20,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
 
 // rota definida 'temporaria' pois se não passar em middleware retorna para rota de nome 'login'
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/rota-redefinida', function () {
+    return view('index');
 })->name('login');
 
 Route::middleware(LoginMiddleware::class)->controller(LoginController::class)->group(function () {

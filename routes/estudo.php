@@ -14,7 +14,7 @@ Route::get('/rota-arquivo-separado', function () {
 });
 
 // Definindo rota: (controller / metodo do controller)
-Route::get('/', [ExemploController::class, 'exemploMetodoDois'])->name('home');
+Route::get('/rota-exemplo', [ExemploController::class, 'exemploMetodoDois'])->name('exemplo-nome-rota');
 
 // Definindo outro grupo de controller, onde tem como um controller para o grupo inteiro de rotas
 Route::controller(ExemploController::class)->group(function () {
