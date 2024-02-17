@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\EstudoApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DtoController;
+use App\Http\Controllers\Api\EstudoApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,6 @@ Route::get('/exemploApi', function () {
 });
 
 Route::get('/sports-index', [EstudoApiController::class, 'index'])->name('api.index');
+
+// DTO
+Route::post('/dto', [DtoController::class, "create"]);

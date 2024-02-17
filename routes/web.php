@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AjaxController;
-use App\Http\Controllers\Filme\FilmeController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Middleware\LoginMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DtoController;
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\HomeController;
+use App\Http\Middleware\LoginMiddleware;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Filme\FilmeController;
 
 
 /*
@@ -59,3 +60,6 @@ Route::get('/ajax', function () {
     return view("Site.ajax.ajax");
 });
 Route::post('/apax-post', [AjaxController::class, "request"])->name('apax-post');
+
+// DTO
+// Route::post('/dto', [DtoController::class, "create"]);
