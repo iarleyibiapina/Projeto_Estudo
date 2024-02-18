@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DTO\ExemploDTO;
+use App\DTO\InputExemploDTO;
+use App\DTO\OutputExemploDTO;
 use Illuminate\Http\Request;
 
 class DtoController extends Controller
@@ -21,6 +23,17 @@ class DtoController extends Controller
                 "situacao",
             ]
         ));
-        dd($dto->toArray());
+        // dd($dto->toArray());
+        $saida = $this->exemplo($dto);
+
+        return response()->json($saida->toArray());
+    }
+
+    // supondo que quero utilizar certas DTOs
+    private function exemplo(ExemploDTO $dto)
+    {
+        // se for usar todos params
+        // return new OutputExemploDTO(... $dto->toArray());
+        return new OutputExemploDTO($dto->name, $dto->idade);
     }
 }
