@@ -63,3 +63,15 @@ Route::post('/apax-post', [AjaxController::class, "request"])->name('apax-post')
 
 // DTO
 // Route::post('/dto', [DtoController::class, "create"]);
+
+// Blade Template
+Route::get('/blade-template', function () {
+    $dadosParaJson = [
+        'a' => '1',
+        'b' => '2',
+        'c' => '3',
+        'd' => '4',
+    ];
+    // enviando um especial para utilizar if e componentes de outra forma
+    return view('Site.sobre', ['dadosParaJson' => $dadosParaJson, 'propaganda' => true, 'false' => false]);
+});
