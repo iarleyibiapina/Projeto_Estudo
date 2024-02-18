@@ -2,7 +2,9 @@
 
 namespace App\DTO;
 
-class ExemploDTO
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+
+class ExemploDTO extends AbstractDTO implements InterfaceDTO
 {
     // ESTA dto trabalha com ESTES tipos de DADOS
 
@@ -18,6 +20,7 @@ class ExemploDTO
         public readonly ?int $idade = 0,
         public readonly ?bool $situacao = false
     ) {
+        $this->validate();
     }
 
     // definindo padrao
@@ -30,4 +33,36 @@ class ExemploDTO
     // $this->idade = $idade;
     // $this->situacao = $situacao;
     // }
+
+    // validações
+
+    public function rules(): array
+    {
+        return [
+            'name' => [
+                'required',
+                'string',
+                'min:5'
+            ]
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'necessario',
+            'name.string' => 'precisa ser string',
+            'name.min' => 'minimo :min',
+        ];
+    }
+
+    public function validator(): ValidationValidator
+    {
+        return validator($this->toArray(), $this->rules(), $this->messages());
+    }
+
+    public function validate(): array
+    {
+        return $this->validator()->validate();
+    }
 }
