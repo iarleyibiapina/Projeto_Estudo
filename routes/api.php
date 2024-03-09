@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DtoController;
 use App\Http\Controllers\Api\EstudoApiController;
+use App\Http\Controllers\Api\SimpleApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::get('/sports-index', [EstudoApiController::class, 'index'])->name('api.in
 
 // DTO
 Route::post('/dto', [DtoController::class, "create"]);
+
+// Resource
+Route::apiResource('/api-resource', SimpleApiController::class);
