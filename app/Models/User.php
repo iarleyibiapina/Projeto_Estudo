@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Blog\Post;
+use App\Models\Blog\Comment;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // @Blog
+    public function posts()
+    {
+        return $this->hasMany(Post::class, "id_post");
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,"id_comment");
+    }
+
+    // se eu colocar getXXXAttribute() eu consigo acessar como propriedade $user->xxx
+    public function getExemploAttribute(): string
+    {
+        return "Valor Exemplo";
+    }
 }
