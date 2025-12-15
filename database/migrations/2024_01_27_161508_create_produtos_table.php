@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('nome', 60);
             $table->string('sku', 60);
             $table->text('descricao');
-            $table->unsignedFloat('preco')->default(0);
-            $table->unsignedFloat('desconto')->default(0);
-            $table->unsignedFloat('preco_com_desconto')->default(0);
+            $table->float('preco')->default(0);
+            $table->float('desconto')->default(0);
+            $table->float('preco_com_desconto')->default(0);
             $table->unsignedInteger('estoque')->default(0);
             $table->string('referencia', 60)->nullable();
             $table->string('codigo_de_barras', 15)->nullable();

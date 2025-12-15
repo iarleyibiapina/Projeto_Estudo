@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DtoController;
 use App\Http\Controllers\AjaxController;
@@ -74,4 +76,7 @@ Route::get('/blade-template', function () {
     ];
     // enviando um especial para utilizar if e componentes de outra forma
     return view('Site.sobre', ['dadosParaJson' => $dadosParaJson, 'propaganda' => true, 'false' => false]);
+});
+
+Route::get('testes', function () {
 });

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Database\Seeders\Blog\CommentSeeder;
+use Database\Seeders\Blog\PostSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,5 +32,10 @@ class DatabaseSeeder extends Seeder
         // para iniciar o seeder
         // php artisan db:seed
         // php artisan db:seed --class=UserSeeder
+
+        // $this->call([
+        //     PostSeeder::class,
+        //     CommentSeeder::class,
+        // ]);
     }
 }
