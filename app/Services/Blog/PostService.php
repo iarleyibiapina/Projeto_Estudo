@@ -4,11 +4,14 @@ namespace App\Services\Blog;
 
 use App\DTO\Blog\CommentDTO;
 use App\DTO\Blog\PostDTO;
+use App\Mail\Blog\PostNewCommentMail;
 use App\Models\Blog\Comment;
 use App\Models\Blog\Post;
+use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Mail;
 
 class PostService
 {
@@ -118,13 +121,27 @@ class PostService
     public function addComment(array $data): Comment
     {
         try {
-            return Comment::create(
+            $Post = Post::findOrFail($data['post_id']);
+
+            $CommentCreated = Comment::create(
                 (new CommentDTO(
                     $data['user_id'],
                     post_id: $data['post_id'],
                     comment: $data['comment']
                 ))->all()
             );
+
+            if($CommentCreated){
+                // OU criar um event-listener para enviar o email
+                Mail::to($Post->user->email)
+                    ->send(new PostNewCommentMail(
+                        userComment: User::find($data['user_id']),
+                        post: $Post,
+                        commentContent: $data['comment'],
+                    ));
+            }
+
+            return $CommentCreated;
         } catch (\Throwable $th) {
             throw $th;
         }
