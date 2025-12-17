@@ -1,8 +1,9 @@
 @extends('Blog.master')
 
+{{-- {{ dd($posts); }} --}}
+
 @section('header-intro')
-    <h1 class="mb-3 h2">Welcome to the Blog Home Page</h1>
-    <p class="mb-3">Discover the latest articles and insights from our blog.</p>
+    <h1 class="mb-3 h2">Listagem de todos os posts criados</h1>
 
     <form class="d-flex justify-content-center" method="GET" action="{{ route('blog.home') }}">
         <input
@@ -11,7 +12,7 @@
             name="search"
             placeholder="Search posts..."
             aria-label="Search"
-            value="{{ request('search') }}">
+            value="{{ request('search') ?? ''}}">
         <button class="btn btn-primary ms-2" type="submit">Search</button>
     </form>
 @endsection
@@ -23,7 +24,7 @@
         @if(request()->has('search') && request('search') != '')
             <h4 class="mb-5"><strong>Search results for "{{ request('search') }}"</strong></h4>
             @else
-            <h4 class="mb-5"><strong>Latest posts</strong></h4>
+            <h4 class="mb-5"><strong>{{ $posts->total() }} - Posts</strong></h4>
         @endif
 
         <div class="row">
@@ -62,14 +63,9 @@
 
       </section>
       <!--Section: Content-->
-
-      <!-- Pagination -->
-    @if(request()->has('search'))
-        <div class="d-flex justify-content-center">
-            {{-- levando a pesquisa para a url --}}
-          {{ $posts
-            ->appends(['search' => request('search')])
-            ->links() }}
-        </div>
-    @endif
+    <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
+    {{-- alternativa com componentes e generico --}}
+    {{-- <x-Blog.pagination :paginator="$posts" /> --}}
 @endsection

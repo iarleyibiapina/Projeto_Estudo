@@ -1,10 +1,10 @@
 @extends('Blog.master')
 
 @section('header-intro')
-    <h1 class="mb-3 h2">Welcome to the Blog Home Page</h1>
-    <p class="mb-3">Discover the latest articles and insights from our blog.</p>
+    <h1 class="mb-3 h2">Meus posts criados</h1>
+    {{-- <p class="mb-3">Discover the latest articles and insights from our blog.</p> --}}
 
-    <form class="d-flex justify-content-center" method="GET" action="{{ route('blog.home') }}">
+    {{-- <form class="d-flex justify-content-center" method="GET" action="{{ route('blog.home') }}">
         <input
             class="form-control w-50"
             type="search"
@@ -13,7 +13,7 @@
             aria-label="Search"
             value="{{ request('search') }}">
         <button class="btn btn-primary ms-2" type="submit">Search</button>
-    </form>
+    </form> --}}
 @endsection
 
 @section('main')
@@ -64,12 +64,19 @@
       <!--Section: Content-->
 
       <!-- Pagination -->
-    @if(request()->has('search'))
-        <div class="d-flex justify-content-center">
-            {{-- levando a pesquisa para a url --}}
-          {{ $posts
-            ->appends(['search' => request('search')])
-            ->links() }}
-        </div>
-    @endif
+      <nav class="my-4" aria-label="...">
+        <ul class="pagination pagination-circle justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
 @endsection

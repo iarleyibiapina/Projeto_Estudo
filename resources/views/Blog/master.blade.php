@@ -44,6 +44,7 @@
         @include('Blog.components.footer')
     </footer>
 
+    @yield('script')
     <script type="text/javascript" src="{{ asset("js/Blog/mdb.min.js") }} "></script>
     <script type="text/javascript" src="{{ asset("js/Blog/script.js") }} "></script>
 </body>

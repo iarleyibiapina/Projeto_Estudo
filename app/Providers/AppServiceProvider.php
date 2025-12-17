@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\TaskModel;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use TaskRepository;
 
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->registerMigrations();
         $this->registerDebugBar();
+        Paginator::useBootstrapFive(); // Usar o bootstrap 5 no paginador
     }
 
     public function registerMigrations(): void

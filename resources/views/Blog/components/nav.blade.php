@@ -14,6 +14,18 @@
               <a class="nav-link" aria-current="page" href="{{ route('blog.home') }}">Home</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ route('blog.post.getCreatePostView') }}">Criar um post novo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{ route('blog.post.getMyCreatedPostsView') }}">Meus posts criados</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{{ route('blog.post.getAllPostsView') }}"
+                >Todos os posts</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('blog.auth.logout') }}" rel="nofollow"
                 target="_blank">Logout</a>
             </li>
